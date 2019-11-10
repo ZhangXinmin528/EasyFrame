@@ -1,0 +1,2 @@
+include ':app', ':lib.Core', ':lib.Net'
+rootProject.name='EasyFrame'
