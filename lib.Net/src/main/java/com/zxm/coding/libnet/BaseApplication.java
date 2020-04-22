@@ -8,7 +8,6 @@ import com.zxm.coding.libnet.component.AppComponent;
 import com.zxm.coding.libnet.component.DaggerAppComponent;
 import com.zxm.coding.libnet.module.AppModule;
 
-
 /**
  * Created by ZhangXinmin on 2018/11/29.
  * Copyright (c) 2018 . All rights reserved.

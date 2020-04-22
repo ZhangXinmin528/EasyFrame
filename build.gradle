@@ -7,7 +7,7 @@ buildscript {
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.2'
+        classpath 'com.android.tools.build:gradle:3.6.1'
         
     }
 }
@@ -16,7 +16,8 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+
+        maven { url "https://jitpack.io" }
     }
 }
 
@@ -71,5 +72,7 @@ ext {
     glideVersion = '4.9.0'
 
     recyclerAdapterVersion = "2.9.40"
+
+    smartrefreshVersion = '1.0.5.1'
 
 }
