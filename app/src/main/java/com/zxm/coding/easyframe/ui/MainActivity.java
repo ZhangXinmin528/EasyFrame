@@ -2,7 +2,6 @@ package com.zxm.coding.easyframe.ui;
 
 
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
@@ -27,6 +26,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+/**
+ * Created by ZhangXinmin on 2020/4/22.
+ * Copyright (c) 2020 . All rights reserved.
+ */
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Inject
@@ -55,6 +58,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void initViews() {
         mSearchEt = findViewById(R.id.et_search);
+        mSearchEt.setText("北京");
         mRefreshLayout = findViewById(R.id.srl_list);
         mRefreshLayout.setDragRate(0.5f);//显示下拉高度/手指真实下拉高度=阻尼效果
         mRefreshLayout.setReboundDuration(300);//回弹动画时长（毫秒）
@@ -74,7 +78,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 mRefreshLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        reauestData(true);
+                        requestData(true);
                         mRefreshLayout.finishRefresh();
                     }
                 }, 2000);
@@ -89,7 +93,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 mRefreshLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        reauestData(false);
+                        requestData(false);
                         mRefreshLayout.finishLoadMore();
                     }
                 }, 2000);
@@ -97,7 +101,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         });
 
         mRecyclerView = findViewById(R.id.recyclerview_list);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
+        mRecyclerView.addItemDecoration(new StaggeredItemDecoration(mContext));
         final StaggeredGridLayoutManager layoutManager =
                 new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         //防止Item切换
@@ -111,7 +115,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_search:
-                reauestData(false);
+                requestData(false);
                 break;
         }
     }
@@ -119,7 +123,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     /**
      * 请求图片接口
      */
-    private void reauestData(boolean isRefgresh) {
+    private void requestData(boolean isRefgresh) {
+    MLogger.d(TAG,"requestData()");
         if (isRefgresh) {
             mPageIndex = 0;
             if (!mDataList.isEmpty()) {
@@ -131,12 +136,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             addDisposable(viewModel.requestImage(input, mPageIndex, 20)
                     .subscribe(responseBody -> {
                         final String result = responseBody.string();
-                        MLogger.e(TAG, "请求图片接口..请求结果：" + result);
+//                        MLogger.e(TAG, "请求图片接口..请求结果：" + result);
                         final JSONObject jsonObject = JSON.parseObject(result);
                         final List<ImageEntity> temp = JSONObject.parseArray(jsonObject.getString("list"), ImageEntity.class);
                         if (temp != null && !temp.isEmpty()) {
                             mDataList.addAll(temp);
                             mAdapter.notifyDataSetChanged();
+                            MLogger.e(TAG, "请求图片接口..请求结果：" + mDataList.size());
                         }
                         mPageIndex++;
                     }, throwable -> {
