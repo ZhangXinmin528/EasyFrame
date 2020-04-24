@@ -38,6 +38,6 @@ dependencies {
 
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerCompilerVersion"
 
-    implementation project(path: ':lib.Core')
-    implementation project(path: ':lib.Net')
+    implementation project(path: ':lib.core')
+    implementation project(path: ':lib.net')
 }

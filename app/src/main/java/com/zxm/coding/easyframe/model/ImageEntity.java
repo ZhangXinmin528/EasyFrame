@@ -12,6 +12,8 @@ public class ImageEntity implements Parcelable {
     private String width;
     private String height;
     private String thumb;
+    private int thumbWidth;
+    private int thumbHeight;
 
     public ImageEntity() {
     }
@@ -22,6 +24,8 @@ public class ImageEntity implements Parcelable {
         width = in.readString();
         height = in.readString();
         thumb = in.readString();
+        thumbWidth = in.readInt();
+        thumbHeight = in.readInt();
     }
 
     public static final Creator<ImageEntity> CREATOR = new Creator<ImageEntity>() {
@@ -47,6 +51,8 @@ public class ImageEntity implements Parcelable {
         dest.writeString(width);
         dest.writeString(height);
         dest.writeString(thumb);
+        dest.writeInt(thumbWidth);
+        dest.writeInt(thumbHeight);
     }
 
     public String getTitle() {
@@ -79,5 +85,33 @@ public class ImageEntity implements Parcelable {
 
     public void setThumb(String thumb) {
         this.thumb = thumb;
+    }
+
+    public int getThumbWidth() {
+        return thumbWidth;
+    }
+
+    public void setThumbWidth(int thumbWidth) {
+        this.thumbWidth = thumbWidth;
+    }
+
+    public int getThumbHeight() {
+        return thumbHeight;
+    }
+
+    public void setThumbHeight(int thumbHeight) {
+        this.thumbHeight = thumbHeight;
+    }
+
+    @Override
+    public String toString() {
+        return "ImageEntity{" +
+                "title='" + title + '\'' +
+                ", width='" + width + '\'' +
+                ", height='" + height + '\'' +
+                ", thumb='" + thumb + '\'' +
+                ", thumbWidth=" + thumbWidth +
+                ", thumbHeight=" + thumbHeight +
+                '}';
     }
 }

@@ -1,2 +1,2 @@
-include ':app', ':lib.Core', ':lib.Net'
+include ':app', ':lib.core', ':lib.net'
 rootProject.name='EasyFrame'

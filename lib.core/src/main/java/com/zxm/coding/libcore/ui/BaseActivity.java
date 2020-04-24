@@ -135,4 +135,12 @@ public abstract class BaseActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        if (mDisposables!=null){
+            mDisposables.clear();
+        }
+        super.onDestroy();
+    }
 }

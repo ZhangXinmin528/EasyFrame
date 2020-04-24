@@ -1,7 +1,6 @@
 package com.zxm.coding.easyframe.ui;
 
 
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
@@ -38,9 +37,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private EditText mSearchEt;
     private SmartRefreshLayout mRefreshLayout;
     private RecyclerView mRecyclerView;
-    private List<ImageEntity> mDataList;
     private ImageAdapter mAdapter;
     private int mPageIndex;
+    private List<ImageEntity> mDataList;
 
     @Override
     protected Object setLayout() {
@@ -59,6 +58,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void initViews() {
         mSearchEt = findViewById(R.id.et_search);
         mSearchEt.setText("北京");
+
         mRefreshLayout = findViewById(R.id.srl_list);
         mRefreshLayout.setDragRate(0.5f);//显示下拉高度/手指真实下拉高度=阻尼效果
         mRefreshLayout.setReboundDuration(300);//回弹动画时长（毫秒）
@@ -75,36 +75,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                mRefreshLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        requestData(true);
-                        mRefreshLayout.finishRefresh();
-                    }
-                }, 2000);
-
+                requestData(true);
             }
         });
 
         mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
-
-                mRefreshLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        requestData(false);
-                        mRefreshLayout.finishLoadMore();
-                    }
-                }, 2000);
+                requestData(false);
             }
         });
 
         mRecyclerView = findViewById(R.id.recyclerview_list);
-        mRecyclerView.addItemDecoration(new StaggeredItemDecoration(mContext));
+        mRecyclerView.addItemDecoration(new DividerGridItemDecoration(mContext));
         final StaggeredGridLayoutManager layoutManager =
-                new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-        //防止Item切换
+                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        //解决跳动问题
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -123,9 +109,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     /**
      * 请求图片接口
      */
-    private void requestData(boolean isRefgresh) {
-    MLogger.d(TAG,"requestData()");
-        if (isRefgresh) {
+    private void requestData(boolean isRefresh) {
+        MLogger.d(TAG, "requestData().. isRefresh : " + isRefresh);
+        if (isRefresh) {
             mPageIndex = 0;
             if (!mDataList.isEmpty()) {
                 mDataList.clear();
@@ -133,23 +119,31 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
         final String input = mSearchEt.getEditableText().toString().trim();
         if (!TextUtils.isEmpty(input)) {
-            addDisposable(viewModel.requestImage(input, mPageIndex, 20)
+            addDisposable(viewModel.requestImage(input, mPageIndex, 50)
                     .subscribe(responseBody -> {
                         final String result = responseBody.string();
-//                        MLogger.e(TAG, "请求图片接口..请求结果：" + result);
                         final JSONObject jsonObject = JSON.parseObject(result);
                         final List<ImageEntity> temp = JSONObject.parseArray(jsonObject.getString("list"), ImageEntity.class);
                         if (temp != null && !temp.isEmpty()) {
                             mDataList.addAll(temp);
                             mAdapter.notifyDataSetChanged();
-                            MLogger.e(TAG, "请求图片接口..请求结果：" + mDataList.size());
                         }
                         mPageIndex++;
+                        finishRequest(isRefresh);
                     }, throwable -> {
                         Toast.makeText(mContext, "请求图片接口异常..[message:" + throwable.getMessage() + "]",
                                 Toast.LENGTH_SHORT).show();
                         MLogger.e(TAG, "请求图片接口异常..[message:" + throwable.getMessage() + "]");
+                        finishRequest(isRefresh);
                     }));
+        }
+    }
+
+    private void finishRequest(boolean isRefgresh) {
+        if (isRefgresh) {
+            mRefreshLayout.finishRefresh();
+        } else {
+            mRefreshLayout.finishLoadMore();
         }
     }
 }
