@@ -29,6 +29,7 @@ public class ImageAdapter extends BaseQuickAdapter<ImageEntity, BaseViewHolder> 
         final ImageView imageView = helper.getView(R.id.iv_thumb);
         if (item != null) {
 
+            //方案一：
             final int screenWidth = ScreenUtil.getScreenWidth(mContext);
             final int width = screenWidth / 2;
             final int height = item.getThumbHeight() * width / item.getThumbWidth();
@@ -41,6 +42,8 @@ public class ImageAdapter extends BaseQuickAdapter<ImageEntity, BaseViewHolder> 
                     .override(width, height)
                     .into(imageView);
 
+            //方案二：
+            //使用预加载功能，后期研究；
             helper.setText(R.id.tv_item_title, TextUtils.isEmpty(item.getTitle()) ? "" : item.getTitle());
         }
     }
