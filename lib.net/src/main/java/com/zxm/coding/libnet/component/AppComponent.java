@@ -2,7 +2,6 @@ package com.zxm.coding.libnet.component;
 
 import android.content.Context;
 
-
 import com.zxm.coding.libnet.module.AppModule;
 
 import javax.inject.Singleton;

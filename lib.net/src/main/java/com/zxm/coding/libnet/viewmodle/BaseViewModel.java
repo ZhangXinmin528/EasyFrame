@@ -1,9 +1,10 @@
 package com.zxm.coding.libnet.viewmodle;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.OnLifecycleEvent;
-import android.arch.lifecycle.ViewModel;
+
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.ViewModel;
 
 /**
  * Created by ZhangXinmin on 2018/11/29.

@@ -1,6 +1,7 @@
 package com.zxm.coding.easyframe.ui;
 
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.zxm.coding.easyframe.http.MetaApi;
 import com.zxm.coding.libnet.viewmodle.BaseViewModel;

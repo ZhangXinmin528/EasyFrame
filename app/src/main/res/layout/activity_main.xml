@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.LinearLayoutCompat
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/layout_title"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -15,7 +15,7 @@
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.v7.widget.LinearLayoutCompat
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="12dp"
@@ -52,9 +52,9 @@
                 android:src="@drawable/ic_search_white_24dp" />
 
 
-        </android.support.v7.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </android.support.v7.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/srl_list"
@@ -63,7 +63,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_title">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -77,4 +77,4 @@
             android:layout_height="wrap_content" />
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

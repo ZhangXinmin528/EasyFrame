@@ -1,19 +1,14 @@
 package com.zxm.coding.libcore.ui;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.zxm.utils.core.device.DeviceUtil;
-import com.zxm.utils.core.permission.PermissionChecker;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -85,31 +80,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected void getSerialNumber() {
-        if (!PermissionChecker.checkPersmission(mContext, Manifest.permission.READ_PHONE_STATE)) {
-            PermissionChecker.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_PHONE_STATE}, 1001);
-        } else {
-            mSerialNumber = DeviceUtil.getSerialNumber();
-        }
-    }
-
-    @SuppressLint("ObsoleteSdkInt")
-    protected void hideBottomNavigationBar() {
-        //隐藏虚拟按键，并且全屏
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB &&
-                Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) { // lower api
-            View v = this.getWindow().getDecorView();
-            v.setSystemUiVisibility(View.GONE);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //for new api versions.
-            View decorView = getWindow().getDecorView();
-            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
-            decorView.setSystemUiVisibility(uiOptions);
-        }
-    }
-
     /**
      * 页面跳转
      *
@@ -138,7 +108,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        if (mDisposables!=null){
+        if (mDisposables != null) {
             mDisposables.clear();
         }
         super.onDestroy();

@@ -29,50 +29,62 @@ ext {
     // Sdk and tools
     compileSdkVersion = 28
     buildToolsVersion = '28.0.3'
-    minSdkVersion = 21
-    targetSdkVersion = 25
+    minSdkVersion = 19
+    targetSdkVersion = 28
 
     // App dependencies
-    supportLibraryVersion = '28.0.0'
+    appcompatVersion = '1.1.0'
     constraintLayoutVersion = '1.1.3'
-
-    appcompatXVersion = '1.1.0'
-    constraintlayoutXVersion = '1.1.3'
+    cardviewVersion = '1.0.0'
+    recyclerviewVersion = '1.1.0'
+    swiperefreshlayoutVersion = '1.1.0'
 
     //Eventbus
     eventbusVersion = '3.1.1'
 
-    //okhttp
-    okhttp3Version = "3.4.1"
+    //okHttp
+    okhttpVersion = '4.8.0'
 
     //dagger2
     daggerCompilerVersion = "2.19"
-    daggerVersion = "2.19"
-    daggerAndroidVersion = "2.16"
+    daggerVersion = "2.28"
+    daggerAndroidVersion = "2.28"
 
-    //retrofit2
-    retrofit2Version = "2.0.1"
-    retrofit2_rxjava2_adapter = "1.0.0"
+    //retrofit
+    retrofitVersion = '2.9.0'
 
-    //rxjava
-    rxjavaVersion = "2.2.3"
-    rxAndroidVersion = "2.1.1"
+    //okHttp
+    okhttpVersion = '4.8.0'
 
     //fastjson
-    fastjson = '1.2.59'
+    fastjson = '1.2.71'
 
-    //ARouter
-    arouterApiVersion = '1.5.0'
-    arouterCompilerVersion = '1.2.2'
+    //rxjava2
+    rxjava2Version = '2.2.19'
+
+    //rxandroid2
+    rxandroid2Version = '2.1.1'
 
     //util
-    utilVersion = '1.0.2'
+    utilVersion = '3.0.1'
 
     //glide
-    glideVersion = '4.9.0'
+    glideVersion = '4.11.0'
 
-    recyclerAdapterVersion = "2.9.40"
+    //multidex
+    multidexVersion = '1.0.3'
 
-    smartrefreshVersion = '1.0.5.1'
+
+    smartrefreshVersion = '1.1.0'
+
+    recyclerAdapterVersion = "3.0.4"
+
+    fastjsonVersion = '1.2.46'
+
+    eventbusVersion = '3.1.1'
+
+    crashreportVersion = '2.6.6.1'
+
+    nativecrashreportVersion = '3.3.1'
 
 }

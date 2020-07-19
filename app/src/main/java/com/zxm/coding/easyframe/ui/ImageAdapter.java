@@ -1,12 +1,13 @@
 package com.zxm.coding.easyframe.ui;
 
 import android.annotation.SuppressLint;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.zxm.coding.easyframe.R;
 import com.zxm.coding.easyframe.model.ImageEntity;
 import com.zxm.coding.libcore.model.GlideApp;
@@ -30,7 +31,7 @@ public class ImageAdapter extends BaseQuickAdapter<ImageEntity, BaseViewHolder> 
         if (item != null) {
 
             //方案一：
-            final int screenWidth = ScreenUtil.getScreenWidth(mContext);
+            final int screenWidth = ScreenUtil.getScreenWidth(getContext());
             final int width = screenWidth / 2;
             final int height = item.getThumbHeight() * width / item.getThumbWidth();
 
